@@ -23,7 +23,8 @@
     "clean": "rm -rf dist",
     "dev": "webpack-dev-server --open --hot --config webpack.config.js",
     "build": "webpack --config webpack.config.js",
-    "lint": "tslint \"src/**/*.ts\" && tslint \"test/**/*.ts\""
+    "lint": "tslint \"src/**/*.ts\" && tslint \"test/**/*.ts\"",
+    "release": "npm run lint && npm run clean && npm run build"
   },
   "devDependencies": {
     "css-loader": "^0.28.1",
