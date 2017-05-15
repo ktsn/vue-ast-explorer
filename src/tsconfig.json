@@ -2,10 +2,10 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../lib",
-    "experimentalDecorators": true,
-    "declaration": true
+    "experimentalDecorators": true
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "**/*.vue"
   ]
 }

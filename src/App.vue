@@ -3,25 +3,22 @@
     h1.app-title(ref="title") Vue AST Explorer
     .app-contents(:style="{ height: contentHeight + 'px' }")
       codemirror(:code="code", :options="editorOptions" @change="code = arguments[0]")
-      ast.app-ast(:ast="ast")
+      ast-node.app-ast(v-if="ast" :value="ast")
 </template>
 
 <script lang="ts">
 import { Vue, Component } from './component'
 import { compile } from 'vue-template-compiler'
-import Ast from './Ast.vue'
+import './Ast/Ast'
 
 @Component({
   watch: {
     code: 'onChangeCode'
-  },
-  components: {
-    Ast
   }
 })
 export default class App extends Vue {
   code = ''
-  ast = {}
+  ast = null
   contentHeight = 0
 
   editorOptions = {
@@ -55,6 +52,11 @@ export default class App extends Vue {
 <style lang="scss">
 @import '~k-css/k.css';
 
+input,
+button {
+  font-family: inherit;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -82,6 +84,7 @@ export default class App extends Vue {
     padding: 6px 12px;
     flex: 0 0 50%;
     height: 100%;
+    font-family: monospace;
   }
 }
 

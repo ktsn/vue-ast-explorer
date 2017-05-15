@@ -1,30 +1,23 @@
 <template lang="pug">
-ast-array(v-if="isArray(value)", :ast="value", :name="name")
-ast(v-else-if="isObject(value)", :ast="value", :name="name")
+ast-array(v-if="isArray(value)", :value="value", :name="name")
+ast-object(v-else-if="isObject(value)", :value="value", :name="name")
 div(v-else)
   span(v-if="name").ast-property-name {{ name }}:
   span.ast-property-value {{ strValue }}
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from './component'
-import Ast from './Ast.vue'
-import AstArray from './AstArray.vue'
+import { Vue, Component, Prop } from '../component'
 
-@Component({
-  name: 'ast-node',
-  components: {
-    Ast,
-    AstArray
-  }
-})
+@Component
 export default class AstNode extends Vue {
   @Prop(String) name: string
-  @Prop() value: any
+  @Prop({ required: true }) value: any
 
   get strValue(): string {
     if (this.value === undefined) return 'undefined'
     if (this.value === null) return 'null'
+    if (typeof this.value === 'object') return ''
     return JSON.stringify(this.value)
   }
 
