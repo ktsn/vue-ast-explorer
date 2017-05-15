@@ -56,6 +56,7 @@ export default class AstCollection extends Vue {
     padding: 0;
     background-color: transparent;
     border-width: 0;
+    cursor: pointer;
   }
 
   &-property-list {
@@ -64,6 +65,8 @@ export default class AstCollection extends Vue {
 
   &-property-name {
     margin-right: 0.3em;
+    color: #3d608e;
+    font-weight: bold;
   }
 }
 </style>

@@ -40,6 +40,8 @@ export default class AstNode extends Vue {
 <style lang="scss" scoped>
 .ast {
   &-property-name {
+    font-weight: bold;
+    color: #4c8f3d;
     margin-right: 0.3em;
   }
 }
