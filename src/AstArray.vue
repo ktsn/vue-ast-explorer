@@ -5,22 +5,19 @@
       | [
       span(v-if="!open") ...
     ul.ast-property-list(v-if="open && ast")
-      li.ast-property(v-for="value, i in ast")
-        ast-array(v-if="isArray(value)", :ast="value")
-        ast(v-if="isObject(value)", :ast="value")
-        div(v-else)
-          span.ast-property-value {{ JSON.stringify(value) }}
+      li.ast-property(v-for="value in ast")
+        ast-node(:value="value")
     | ]
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from './component'
-import Ast from './Ast.vue'
+import AstNode from './AstNode.vue'
 
 @Component({
   name: 'ast-array',
   components: {
-    Ast
+    AstNode
   }
 })
 export default class AstArray extends Vue {
@@ -32,14 +29,6 @@ export default class AstArray extends Vue {
   ast: any
 
   open = false
-
-  isObject(item: any): boolean {
-    return typeof item === 'object' && item !== null
-  }
-
-  isArray(item: any): boolean {
-    return Array.isArray(item)
-  }
 }
 </script>
 
@@ -54,10 +43,6 @@ export default class AstArray extends Vue {
 
   &-property-list {
     margin-left: 1em;
-  }
-
-  &-property-name {
-    margin-right: 0.3em;
   }
 }
 </style>
