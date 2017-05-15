@@ -11,14 +11,14 @@ import { Vue, Component } from './component'
 import { compile } from 'vue-template-compiler'
 import './Ast/Ast'
 
-@Component({
-  watch: {
-    code: 'onChangeCode'
-  }
-})
+@Component
 export default class App extends Vue {
-  code = ''
-  ast = null
+  code = `<div class="counter">
+  <output>{{ count }}</output>
+  <button @click="increment">+</button>
+</div>
+`
+
   contentHeight = 0
 
   editorOptions = {
@@ -33,9 +33,8 @@ export default class App extends Vue {
     title: HTMLElement
   }
 
-  onChangeCode(code: string): void {
-    const res = compile(code)
-    this.ast = res.ast
+  get ast(): any {
+    return compile(this.code).ast
   }
 
   updateContentHeight(): void {
