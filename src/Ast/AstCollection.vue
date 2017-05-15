@@ -13,6 +13,10 @@
 <script lang="ts">
 import { Vue, Component, Prop } from '../component'
 
+const notOpenDefault = [
+  'parent'
+]
+
 @Component
 export default class AstCollection extends Vue {
   @Prop(String) name: string
@@ -36,6 +40,7 @@ export default class AstCollection extends Vue {
   context: { depth: number }
 
   open = this.context.depth > 0
+    && !notOpenDefault.some(name => name === this.name)
 
   get empty(): boolean {
     return this.entries.length === 0
