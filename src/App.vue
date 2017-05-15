@@ -3,7 +3,7 @@
     h1.app-title(ref="title") Vue AST Explorer
     .app-contents(:style="{ height: contentHeight + 'px' }")
       codemirror(:code="code", :options="editorOptions" @change="code = arguments[0]")
-      ast-node.app-ast(v-if="ast" :value="ast")
+      ast-node.app-ast(v-if="ast" :value="ast", :context="{ depth: 5 }")
 </template>
 
 <script lang="ts">

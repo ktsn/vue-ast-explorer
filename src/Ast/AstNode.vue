@@ -1,6 +1,6 @@
 <template lang="pug">
-ast-array(v-if="isArray(value)", :value="value", :name="name")
-ast-object(v-else-if="isObject(value)", :value="value", :name="name")
+ast-array(v-if="isArray(value)", :value="value", :name="name", :context="context")
+ast-object(v-else-if="isObject(value)", :value="value", :name="name", :context="context")
 div(v-else)
   span(v-if="name").ast-property-name {{ name }}:
   span.ast-property-value {{ strValue }}
@@ -13,6 +13,12 @@ import { Vue, Component, Prop } from '../component'
 export default class AstNode extends Vue {
   @Prop(String) name: string
   @Prop({ required: true }) value: any
+
+  @Prop({
+    type: Object,
+    required: true
+  })
+  context: { depth: number }
 
   get strValue(): string {
     if (this.value === undefined) return 'undefined'

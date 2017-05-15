@@ -6,7 +6,7 @@
     span(v-if="!open && !empty") ...
   ul.ast-property-list(v-if="open && !empty")
     li.ast-property(v-for="{ value, key } in entries")
-      ast-node(:value="value", :name="key")
+      ast-node(:value="value", :name="key", :context="childContext")
   | {{ braces[1] }}
 </template>
 
@@ -29,10 +29,22 @@ export default class AstCollection extends Vue {
   })
   entries: { value: any, key?: string }[]
 
-  open = false
+  @Prop({
+    type: Object,
+    required: true
+  })
+  context: { depth: number }
+
+  open = this.context.depth > 0
 
   get empty(): boolean {
     return this.entries.length === 0
+  }
+
+  get childContext(): { depth: number } {
+    return {
+      depth: this.context.depth - 1
+    }
   }
 }
 </script>
